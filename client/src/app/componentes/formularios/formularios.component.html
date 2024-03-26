@@ -1,0 +1,108 @@
+<div class="jumbotron">
+  <h4><u>Reactive form</u></h4>
+  <br />
+  <form #contactForm="ngForm" [formGroup]="f" (ngSubmit)="enviarRf()">
+    <!-- Campo nombre -->
+    <div class="form-group">
+      <label>nombre</label>
+      <input type="text" class="form-control" formControlName="nombre" />
+      <!-- mensajes de validación -->
+      <div *ngIf="f.controls['nombre'].invalid && f.controls['nombre'].dirty && f.controls['nombre'].errors" 
+      class="alert-danger mt-1"
+      >
+        <div *ngIf="f.controls['nombre'].errors['required']">
+          Deje su nombre para ponernos en contacto.
+        </div>
+      </div>
+    </div>
+
+    <!-- Campo email -->
+    <div class="form-group">
+      <label>email</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+      />
+      <!-- mensajes de validación -->
+      <div
+      *ngIf="
+        f.controls['email'].invalid &&
+        f.controls['email'].dirty &&
+        f.controls['email'].errors
+      "
+      class="alert-danger mt-1"
+    >
+      <div *ngIf="f.controls['email'].errors['pattern']">
+        El email ingresado no es válido.
+      </div>
+    </div>
+    </div>
+
+
+    <!-- Campo mensaje -->
+    <div class="form-group">
+      <label for="mensaje-rf">mensaje</label>
+      <input
+        id="mensaje-rf"
+        type="text"
+        class="form-control"
+        formControlName="mensaje"
+      />
+      <!-- mensajes de validación -->
+      <div
+        *ngIf="
+          f.controls['mensaje'].invalid &&
+          f.controls['mensaje'].dirty &&
+          f.controls['mensaje'].errors
+        "
+        class="alert-danger mt-1"
+      >
+        <div *ngIf="f.controls['mensaje'].errors['required']">
+          Esperamos su mensaje para ponernos en contacto.
+        </div>
+      </div>
+    </div>
+
+    <!-- Campo pais -->
+    <div class="form-group">
+      <label for="pais-rf">pais</label>
+      <input
+        id="pais-rf"
+        type="text"
+        class="form-control"
+        formControlName="pais"
+      />
+      <!-- mensajes de validación -->
+      <div *ngIf="false" class="alert alert-danger mt-1"></div>
+    </div>
+
+    <!-- Campo telefono -->
+    <div class="form-group">
+      <label for="telefono-rf">telefono</label>
+      <input
+        id="telefono-rf"
+        type="tel"
+        class="form-control"
+        formControlName="telefono"
+      />
+      <!-- mensajes de validación -->
+      <div *ngIf="false" class="alert alert-danger mt-1"></div>
+    </div>
+
+    <!-- botón de envío -->
+    <button class="button btn btn-success my-3" [disabled]="contactForm.invalid">
+      Enviar
+    </button>
+  </form>
+
+  <hr />
+  <!-- muestra validadores de campos -->
+  <h5>Errores del campo nombre del Reactive Form</h5>
+  <pre><p>{{ f.controls['nombre'].errors | json }}</p></pre>
+
+  <hr />
+  <!-- muestra los datos como un json -->
+  <h5>Datos del Reactive Form</h5>
+  <pre><p>{{ f.value | json }}</p></pre>
+</div>
